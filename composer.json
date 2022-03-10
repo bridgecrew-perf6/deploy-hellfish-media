@@ -1,0 +1,62 @@
+{
+  "name": "deliciousbrains/deploy-hellfish-media",
+  "keywords": [
+    "WordPress",
+    "Composer",
+    "SpinupWP"
+  ],
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Delicious Brains",
+      "homepage": "https://deliciousbrains.com/"
+    }
+  ],
+  "type": "project",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "johnpbloch/wordpress-core-installer": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "require": {
+    "php": ">=7.3",
+    "composer/installers": "^1.4",
+    "johnpbloch/wordpress": "5.*",
+    "oscarotero/env": "^1.1.0",
+    "vlucas/phpdotenv": "^5.3",
+    "wpackagist-plugin/akismet": "^4.2",
+    "wpackagist-plugin/limit-login-attempts-reloaded": "*",
+    "wpackagist-plugin/spinupwp": "*",
+    "wpackagist-plugin/woocommerce": "^6.3",
+    "wpackagist-theme/storefront": "^4.0"
+  },
+  "extra": {
+    "wordpress-install-dir": "public/wp",
+    "installer-paths": {
+      "public/content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "public/content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "public/content/themes/{$name}/": ["type:wordpress-theme"]
+    }
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "php -r \"copy('.env.example', '.env');\""
+    ]
+  },
+  "autoload": {
+    "psr-4": {"DeliciousBrains\\SpinupWPComposerSite\\": "app/"}
+  },
+  "require-dev": {
+    "humanmade/coding-standards": "^1.1"
+  }
+}
